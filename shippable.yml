@@ -1,0 +1,33 @@
+language: python
+
+python:
+  - 2.7
+
+services:
+   - mongodb
+
+env:
+  global:
+    - APP_NAME=thawing-journey-6674
+    - MONGOLAB_URI=mongodb://localhost/test
+    - secure: MRuHkLbL9HPkJPU5lzkKM1+NOq1S5RrhxEyhJkk60xxYiF7DMzydiBN8oFBjWrSmyGeGRuEC22a0I5ItobdWVszfcJCaXHwtfKzfGOUdKuyCnDgvojXhv/jrBvULyLK6zsLw3b8NMxdnwNsHqSPm19qW/EIGEl9Zv/637Igos69z9aT7+xrEG013+6HtKYb8RHm+iPSNsFoBi/RSAHYuM1eLTZWG2WAkjgzZaYmrHCgNwVmk+HOGR+TOWN7Iu5lrjyvC1XDCQrOvo1hZI30cd9OqJ5aadFm3exQpNhI4I7AgOnCbK3NoWNc/GAnqKXCvsaIQ80Jd/uLIOVyMjD6Xmg==
+
+before_install:
+  - which heroku || wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+
+install:
+  - pip install -r requirements.txt
+
+before_script: 
+  - mkdir -p shippable/testresults
+  - mkdir -p shippable/codecoverage
+
+script:
+  - nosetests test.py --with-xunit --xunit-file=shippable/testresults/nosetests.xml
+  - which python && coverage run --branch test.py
+  - which python && coverage xml -o shippable/codecoverage/coverage.xml test.py
+
+after_success:
+  - test -f ~/.ssh/id_rsa.heroku || ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.heroku && heroku keys:add ~/.ssh/id_rsa.heroku
+  - git remote -v | grep ^heroku || heroku git:remote --app $APP_NAME
+  - git push -f heroku master
