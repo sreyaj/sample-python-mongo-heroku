@@ -8,26 +8,38 @@ services:
 
 env:
   global:
-    - APP_NAME=thawing-journey-6674
+    - APP_NAME=shiphit
     - MONGOLAB_URI=mongodb://localhost/test
-    - secure: MRuHkLbL9HPkJPU5lzkKM1+NOq1S5RrhxEyhJkk60xxYiF7DMzydiBN8oFBjWrSmyGeGRuEC22a0I5ItobdWVszfcJCaXHwtfKzfGOUdKuyCnDgvojXhv/jrBvULyLK6zsLw3b8NMxdnwNsHqSPm19qW/EIGEl9Zv/637Igos69z9aT7+xrEG013+6HtKYb8RHm+iPSNsFoBi/RSAHYuM1eLTZWG2WAkjgzZaYmrHCgNwVmk+HOGR+TOWN7Iu5lrjyvC1XDCQrOvo1hZI30cd9OqJ5aadFm3exQpNhI4I7AgOnCbK3NoWNc/GAnqKXCvsaIQ80Jd/uLIOVyMjD6Xmg==
+    - secure: 2jFvrRb+bFVrE2Iysvnjmit/rCUObGf+w0YlD9auH/K3F6WzcmPa4E31G0+PVCN8o8UqoRX1Aoy+tbojgAPJVlSHbhJWTzxYoiqFCqL/wEwMJY9vfJqA3g0Mz6KUcRTo1iyvcGOvC3V47XTxkKylwiAx1HQi2HXxPjdvQ9FHse6p5rL+TDCJzG9bBmD5Pup1fKiG8CPtTMNX3HDVdWrV6t749eIvCLnvX0xshOm8Kr3Kehi2djvyJ9g6p5+U4n7rOw9wIMQy/UAZ1etYNh7yHHTp/sxZmeao/61hkghLwRWSAM81i46N6hXahWvBJgg69pYzWXT0oIGrxr61OB2EBA==
 
-before_install:
-  - which heroku || wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+#before_install:
+ # - which heroku || wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
-install:
-  - pip install -r requirements.txt
+#install:
+ # - pip install -r requirements.txt
 
-before_script: 
-  - mkdir -p shippable/testresults
-  - mkdir -p shippable/codecoverage
+#before_script: 
+ # - mkdir -p shippable/testresults
+  #- mkdir -p shippable/codecoverage
 
-script:
-  - nosetests test.py --with-xunit --xunit-file=shippable/testresults/nosetests.xml
-  - which python && coverage run --branch test.py
-  - which python && coverage xml -o shippable/codecoverage/coverage.xml test.py
+#script:
+ # - nosetests test.py --with-xunit --xunit-file=shippable/testresults/nosetests.xml
+  #- which python && coverage run --branch test.py
+  #- which python && coverage xml -o shippable/codecoverage/coverage.xml test.py
 
-after_success:
-  - test -f ~/.ssh/id_rsa.heroku || ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.heroku && heroku keys:add ~/.ssh/id_rsa.heroku
-  - git remote -v | grep ^heroku || heroku git:remote --ssh-git --app $APP_NAME
-  - git push -f heroku $BRANCH:master
+#after_success:
+ # - test -f ~/.ssh/id_rsa.heroku || ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.heroku && heroku keys:add ~/.ssh/id_rsa.heroku
+  #- git remote -v | grep ^heroku || heroku git:remote --ssh-git --app $APP_NAME
+ # - git push -f heroku $BRANCH:master
+build:
+  ci:
+    - which heroku || wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+    - pip install -r requirements.txt
+    - mkdir -p shippable/testresults
+    - mkdir -p shippable/codecoverage
+    - nosetests test.py --with-xunit --xunit-file=shippable/testresults/nosetests.xml
+    - which python && coverage run --branch test.py
+    - which python && coverage xml -o shippable/codecoverage/coverage.xml test.py
+    - test -f ~/.ssh/id_rsa.heroku || ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.heroku && heroku keys:add ~/.ssh/id_rsa.heroku
+    - git remote -v | grep ^heroku || heroku git:remote --ssh-git --app $APP_NAME
+    - git push -f heroku $BRANCH:master
