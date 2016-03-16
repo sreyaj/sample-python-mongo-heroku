@@ -10,7 +10,7 @@ env:
   global:
     - APP_NAME=shiphit
     - MONGOLAB_URI=mongodb://localhost/test
-    - secure: 2jFvrRb+bFVrE2Iysvnjmit/rCUObGf+w0YlD9auH/K3F6WzcmPa4E31G0+PVCN8o8UqoRX1Aoy+tbojgAPJVlSHbhJWTzxYoiqFCqL/wEwMJY9vfJqA3g0Mz6KUcRTo1iyvcGOvC3V47XTxkKylwiAx1HQi2HXxPjdvQ9FHse6p5rL+TDCJzG9bBmD5Pup1fKiG8CPtTMNX3HDVdWrV6t749eIvCLnvX0xshOm8Kr3Kehi2djvyJ9g6p5+U4n7rOw9wIMQy/UAZ1etYNh7yHHTp/sxZmeao/61hkghLwRWSAM81i46N6hXahWvBJgg69pYzWXT0oIGrxr61OB2EBA==
+    - secure: YCOEZ4ycpDfXfJ5sfRh3y66rfx+lPYieGgMPz/WVQtknIifb7MqyCHPVPdQmkxXwS3KVN1fmHchH28grJlJeQymB7rezfWUZ/xVbULvxc/zd0BVxj5xYdlymGeK/W0KAQsBBGoqhhKQ83EYSaLW61Ql4/wwEExoI+PJipqOgmuYCZj44m9Fmo9+cjuBFykVyBM4XZ+rhj4psGd1+DLdMOIjR8iikh8kMNnI39aEKQALfEhB1fd59fi76/5U6NF9vxbv10Mcq7XzCMEP0NuVqbxOG2QK/EjNfVujYY1JeIMh2lbcDiQQiYWBqXgIBA1Cqu+drie2aXcCcgFVX+X8dvw==
 
 #before_install:
  # - which heroku || wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
