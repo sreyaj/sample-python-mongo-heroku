@@ -6,11 +6,13 @@ python:
 services:
    - mongodb
 
+
 env:
   global:
-    - APP_NAME=shiphit
-    - MONGOLAB_URI=mongodb://localhost/test
-    - secure: k1F0NH8edNIUtg7FA19IlTAaFG6qAx58WHsnC9SHT3Zpy6D1BANUXIyLPiukQxOVKXgXoKlo76PsdvO/LwO6Vix8sqYhg00fKpzauRAzhxcFde4uEUj71SSf9AoOVmRV2zVQCZd03qth0VIrm4nssK29OKLpbGzeLBTCsrQyZe59i9KOll3qQtnfI3obD3qot9QLwA7/vG+QDHq2EdT+jY3suEY8jkYCq7zObLrym+tRe40srqxz+siVybrp4sLkHjYu0NpRZhUMK5RODaIRg7H/QJ4woJBrMxyD9h/Kxcme1yU6Vv7CEjX1czbct0ncPpco6ig3Il0C71Lc+WKrRw==
+    - APP_NAME=shiphit1
+
+on_success :
+  - git push -f git@heroku.com:$APP_NAME.git master    
 #before_install:
  # - which heroku || wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
